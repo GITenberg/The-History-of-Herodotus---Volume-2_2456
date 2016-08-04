@@ -1,0 +1,36 @@
+_repo: The-History-of-Herodotus---Volume-2_2456
+_version: 0.0.1
+contributor:
+  translator:
+    agent_name: Macaulay, G. C. (George Campbell)
+    alias: Macaulay, George Campbell
+    birthdate: 1852
+    deathdate: 1915
+    gutenberg_agent_id: '151'
+    url: http://www.gutenberg.org/2009/agents/151
+creator:
+  author:
+    agent_name: Herodotus
+    alias: Ηρόδοτος
+    birthdate: -484
+    deathdate: -430
+    gutenberg_agent_id: '828'
+    url: http://www.gutenberg.org/2009/agents/828
+    wikipedia: http://en.wikipedia.org/wiki/Herodotus
+description: ''
+gutenberg_issued: '2001-01-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '2456'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcc 'D'
+- !lcsh 'Greece -- History -- To 146 B.C.'
+- !lcc 'PA'
+- !lcsh 'History, Ancient'
+- GITenberg
+title: The History of Herodotus — Volume 2
+url: http://www.gutenberg.org/ebooks/2456
