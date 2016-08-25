@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: mhtDxnU8YVt0XFFE4Nnp4zCA8qNxZ+CSGcPOt6DYCRLCng6UomTu3JURUSQgha9OdDXvkMr62TVzDsuCnCYNt8aVa41wTMVe52d0T6VDKmNt34piCIYFs/1PER7aPKYYEpWPHGTSE0Mfu38rCErD3IYLQwTXHOy4yn5PoQSYkubL5LVysnvidgDaj1axi/IFVvPDjqHFIg1A6MfXx93CPjJz8XpsGAZipYwsJHBQ+kMI6EGSiFluCb6W6kPmFTJY7/r+r1HYTeEVZz0xLfVmPOyu+2F0XxMAbCTKDwuLE056Ko7TY32XFWOSPCTVZAyLiGcjkhF+B2xfAsbIofLmiK6uLsfRpIPYW/XNLoDFuLUGuEaO3Vh+iw60dRffcaIeSQwqLcOA6mqD3uTk14CbOLL6vagx7lett2sMRowAFM2GVPRutV27m/S7VpcXN3GxEciIC/MePgwt7zmfb8AfM5OSvm6aiHWuJV+rMgCsTJVXkp0LJqRaczK/lIiJg0f8uqJZoXaJ/BCPvfKrqICghWFxuMWfZd3yEiZTL62OinlhY+TqC7VfMajtgb/2RPQwH1a/nAxIKVRzd7hiRjbAS3H0jW4GpW1WJLbdrqNViPbmVGqRaXKnWsUA1Jor6Ki7FocdwP2GNnFERppgMMMw3OiKCZ+ld/1t72y32ZW77fU=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/The-History-of-Herodotus---Volume-2_2456
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
